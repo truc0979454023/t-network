@@ -38,7 +38,7 @@ const Register = () => {
   };
   return (
     <div className="h-full">
-      <div className="flex flex-col h-full gap-2 lg:flex-row bg-login bg-center bg-no-repeat bg-cover justify-center lg:justify-around items-center min-h-screen w-full p-4">
+      <div className="flex flex-col h-full gap-2 lg:flex-row  justify-center lg:justify-between items-center min-h-screen w-full p-4">
         <div className=" text-center">
           <h3 className="text-[48px] md:text-[62px] tracking-widest text-gray-800 font-semibold mb-6 uppercase">
             T-Network
@@ -109,7 +109,7 @@ const Register = () => {
                 <small className="text-red-500">{alert.email}</small>
               )}
             </div>
-            <div className="w-full relative">
+            <div className="w-full relative mb-6">
               <label
                 className="block text-gray-800 text-[14px]"
                 htmlFor="password"
@@ -131,11 +131,13 @@ const Register = () => {
                 {isTogglePassword ? "visibility_off" : "visibility"}
               </span>
               {alert.password && (
-                <small className="text-red-500">{alert.password}</small>
+                <small className="absolute bottom-[-18px] left-0 text-red-500">
+                  {alert.password}
+                </small>
               )}
             </div>
 
-            <div className="w-full relative">
+            <div className="w-full relative mb-6">
               <label
                 className="block text-gray-800 text-[14px]"
                 htmlFor="cf_password"
@@ -159,7 +161,9 @@ const Register = () => {
                 {isToggleConfirmPassword ? "visibility_off" : "visibility"}
               </span>
               {alert.cf_password && (
-                <small className="text-red-500">{alert.cf_password}</small>
+                <small className="absolute bottom-[-18px] left-0 text-red-500">
+                  {alert.cf_password}
+                </small>
               )}
             </div>
 

@@ -28,7 +28,7 @@ const Login = () => {
     dispatch(login(userData));
   };
   return (
-    <div className="flex flex-col gap-2 lg:flex-row bg-login bg-center bg-no-repeat bg-cover justify-center lg:justify-around items-center w-full min-h-screen h-full p-4">
+    <div className="flex flex-col gap-2 lg:flex-row justify-center lg:justify-between items-center w-full min-h-screen h-full p-4">
       <div className=" text-center">
         <h3 className="text-[48px] md:text-[62px] tracking-widest text-gray-800 font-semibold mb-6 uppercase">
           T-Network

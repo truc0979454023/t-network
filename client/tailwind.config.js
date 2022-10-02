@@ -3,9 +3,6 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      backgroundImage: {
-        login: "url('./images/login.png')",
-      },
       keyframes: {
         text: {
           "50%": { opacity: 0.1 },
