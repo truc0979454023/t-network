@@ -1,5 +1,6 @@
 import { postDataAPI } from "../../utils/fetchData";
 import { GLOBALTYPES } from "./globalType";
+import valid from "../../utils/valid";
 
 export const login = (data) => async (dispatch) => {
   try {
@@ -42,5 +43,30 @@ export const refreshToken = () => async (dispatch) => {
         payload: { error: error.response.data.msg },
       });
     }
+  }
+};
+
+export const register = (data) => async (dispatch) => {
+  try {
+    const check = valid(data);
+
+    if (check.errLength > 0)
+      return dispatch({ type: GLOBALTYPES.ALERT, payload: check.errMsg });
+
+    dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
+
+    const res = await postDataAPI("register", data);
+
+    dispatch({
+      type: GLOBALTYPES.AUTH,
+      payload: { token: res.data.access_token, user: res.data.user },
+    });
+
+    dispatch({ type: GLOBALTYPES.ALERT, payload: {} });
+  } catch (error) {
+    dispatch({
+      type: GLOBALTYPES.ALERT,
+      payload: { error: error.response.data.msg },
+    });
   }
 };

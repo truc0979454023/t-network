@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { login } from "../redux/actions/authAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const initalState = { email: "", password: "" };
@@ -10,6 +11,13 @@ const Login = () => {
 
   const [isTogglePassword, setIsTogglePassword] = useState(false);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const { auth } = useSelector((state) => state);
+
+  useEffect(() => {
+    if (auth.token) navigate("/");
+  }, [auth.token, navigate]);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -20,7 +28,7 @@ const Login = () => {
     dispatch(login(userData));
   };
   return (
-    <div className="flex flex-col gap-2 lg:flex-row bg-login bg-center bg-no-repeat bg-cover justify-center lg:justify-around items-center w-full h-screen p-4">
+    <div className="flex flex-col gap-2 lg:flex-row bg-login bg-center bg-no-repeat bg-cover justify-center lg:justify-around items-center w-full min-h-screen h-full p-4">
       <div className=" text-center">
         <h3 className="text-[48px] md:text-[62px] tracking-widest text-gray-800 font-semibold mb-6 uppercase">
           T-Network

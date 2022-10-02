@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 
 const Toast = ({ msg, handleShow, color }) => {
   const [number, setNumber] = useState(0);
+
+  const { background, text } = color;
+
   useEffect(() => {
     const count = setInterval(() => {
       setNumber((number) => number + 50);
@@ -13,17 +16,17 @@ const Toast = ({ msg, handleShow, color }) => {
     return () => {
       return clearInterval(count);
     };
-  }, [number, handleShow]);
+  }, [number]);
 
   return (
-    <div className="fixed top-[4px] right-0  w-full max-w-xs bg-white rounded-lg shadow p-4 ">
+    <div className="fixed top-[4px] right-0  w-full max-w-xs bg-white rounded-lg shadow p-4 z-50 ">
       <div
         id="toast-success"
-        className={`flex items-center mb-4 text-gray-500  `}
+        className="flex items-center mb-4 text-gray-500"
         role="alert"
       >
         <div
-          className={`inline-flex flex-shrink-0 justify-center items-center w-8 h-8 bg-${color.bg} text-${color.text} rounded-lg`}
+          className={`inline-flex flex-shrink-0 justify-center items-center w-8 h-8 ${background} ${text} rounded-lg`}
         >
           <svg
             aria-hidden="true"
@@ -44,7 +47,7 @@ const Toast = ({ msg, handleShow, color }) => {
         <button
           onClick={handleShow}
           type="button"
-          className="ml-auto -mx-1.5 -my-1.5 bg-white text-red-400 hover:text-red-600 rounded-lg focus:ring-2 focus:ring-red-300 p-1.5 hover:bg-red-100 inline-flex h-8 w-8"
+          className="ml-auto -mx-1.5 -my-1.5 bg-white text-red-500 hover:text-red-600 rounded-lg focus:ring-2 focus:ring-red-300 p-1.5 hover:bg-red-100 inline-flex h-8 w-8"
           data-dismiss-target="#toast-success"
           aria-label="Close"
         >
@@ -66,7 +69,7 @@ const Toast = ({ msg, handleShow, color }) => {
       </div>
       <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
         <div
-          className={`bg-${color.text} h-1.5 rounded-full`}
+          className={`${background} h-1.5 rounded-full`}
           style={{ width: `${number / 100}%` }}
         ></div>
       </div>

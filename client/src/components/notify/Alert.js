@@ -8,6 +8,7 @@ const ALert = () => {
   const dispatch = useDispatch();
   const { alert } = useSelector((state) => state);
 
+  console.log(alert);
   return (
     <div>
       {alert.loading && <Loading />}
@@ -15,14 +16,14 @@ const ALert = () => {
         <Toast
           msg={alert.error}
           handleShow={() => dispatch({ type: GLOBALTYPES.ALERT, payload: {} })}
-          color={{ bg: "red-200", text: "red-500" }}
+          color={{ background: "bg-red-200", text: "text-red-500" }}
         />
       )}
       {alert.success && (
         <Toast
           msg={alert.success}
           handleShow={() => dispatch({ type: GLOBALTYPES.ALERT, payload: {} })}
-          color={{ bg: "green-200", text: "green-500" }}
+          color={{ background: "bg-green-200", text: "text-green-500" }}
         />
       )}
     </div>
