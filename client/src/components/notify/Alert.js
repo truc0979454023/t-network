@@ -8,7 +8,6 @@ const ALert = () => {
   const dispatch = useDispatch();
   const { alert } = useSelector((state) => state);
 
-  console.log(alert);
   return (
     <div>
       {alert.loading && <Loading />}

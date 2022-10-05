@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
       maxlength: 25,
-      unique: true,
     },
     username: {
       type: String,
@@ -29,7 +28,8 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: "",
+      default:
+        "https://res.cloudinary.com/nomame/image/upload/v1632758944/nextjs/user_nez06k.png",
     },
     role: {
       type: String,

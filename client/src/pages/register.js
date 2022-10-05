@@ -19,10 +19,9 @@ const Register = () => {
 
   const { email, password, username, fullname, cf_password } = userData;
 
-  const { auth, alert } = useSelector((state) => state);
-  const dispatch = useDispatch();
-
   const navigate = useNavigate();
+  const { alert, auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (auth.token) navigate("/");
@@ -32,9 +31,14 @@ const Register = () => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(register(userData));
+    dispatch(register(userData)).then((data) => {
+      if (data.status === 200) {
+        navigate("/");
+        setUserData(initalState);
+      }
+    });
   };
   return (
     <div className="h-full">
@@ -46,7 +50,7 @@ const Register = () => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="w-[360px] md:w-[480px] bg-white flex border-4 border-gray-800 flex-col gap-5 p-4 rounded-md">
+          <div className="w-[350px] md:w-[480px] bg-white flex border-4 border-gray-800 flex-col gap-5 p-4 rounded-md">
             <h3 className=" w-max text-[24px] tracking-widest text-gray-800 font-semibold">
               REGISTER
             </h3>
@@ -223,7 +227,7 @@ const Register = () => {
               submit
             </button>
             <div className="w-full h-[1px] bg-gray-200"></div>
-            <Link to="/login">
+            <Link to="/">
               <p className="uppercase bg-red-500 text-center w-full p-2 rounded-md font-semibold text-white tracking-widest">
                 Login
               </p>

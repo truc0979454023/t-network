@@ -6,13 +6,14 @@ const authCtrl = {
   register: async (req, res) => {
     try {
       const { fullname, username, email, password, gender } = req.body;
+
       let newUserName = username.toLowerCase().replace(/ /g, "");
 
       const user_name = await Users.findOne({ username: newUserName });
       if (user_name)
         return res.status(400).json({ msg: "This user name already axists." });
 
-      const user_email = await Users.findOne({ email: email });
+      const user_email = await Users.findOne({ email });
       if (user_email)
         return res.status(400).json({ msg: "This email already axists." });
 
@@ -31,24 +32,24 @@ const authCtrl = {
         gender,
       });
 
-      const access_token = createAccessToken({ id: newUser._id });
-      const refresh_token = createRefreshToken({ id: newUser._id });
+      // const access_token = createAccessToken({ id: newUser._id });
+      // const refresh_token = createRefreshToken({ id: newUser._id });
 
-      res.cookie("refreshtoken", refresh_token, {
-        httpOnly: true,
-        path: "/api/refresh_token",
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-      });
+      // res.cookie("refreshtoken", refresh_token, {
+      //   httpOnly: true,
+      //   path: "/api/refresh_token",
+      //   maxAge: 30 * 24 * 60 * 60 * 1000,
+      // });
 
       await newUser.save();
 
       res.json({
         msg: "Register success!",
-        access_token,
-        user: {
-          ...newUser._doc,
-          password: "",
-        },
+        // access_token,
+        // user: {
+        //   ...newUser._doc,
+        //   password: "",
+        // },
       });
     } catch (error) {
       return res.status(500).json({ msg: error.message });

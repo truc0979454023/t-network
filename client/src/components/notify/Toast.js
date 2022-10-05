@@ -19,7 +19,7 @@ const Toast = ({ msg, handleShow, color }) => {
   }, [number]);
 
   return (
-    <div className="fixed top-[4px] right-0  w-full max-w-xs bg-white rounded-lg shadow p-4 z-50 ">
+    <div className="fixed top-8 right-2  w-full max-w-xs bg-white rounded-lg shadow p-4 z-50 ">
       <div
         id="toast-success"
         className="flex items-center mb-4 text-gray-500"

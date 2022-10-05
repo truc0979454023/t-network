@@ -13,18 +13,18 @@ app.use(cookieParser());
 // Routes
 
 app.use("/api", require("./routes/authRouter"));
+app.use("/api", require("./routes/userRouter"));
 
-const URI = process.env.MONGOOSE_URL;
-
+const URI = process.env.MONGODB_URL;
 mongoose.connect(
   URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   },
-  (err) => {
-    if (err) throw err;
-    console.log("Connect to mongodb.");
+  (error) => {
+    if (error) throw error;
+    console.log("Connected to mongodb");
   }
 );
 

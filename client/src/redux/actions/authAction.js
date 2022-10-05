@@ -57,12 +57,22 @@ export const register = (data) => async (dispatch) => {
 
     const res = await postDataAPI("register", data);
 
-    dispatch({
-      type: GLOBALTYPES.AUTH,
-      payload: { token: res.data.access_token, user: res.data.user },
-    });
+    dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } });
 
-    dispatch({ type: GLOBALTYPES.ALERT, payload: {} });
+    return res;
+  } catch (error) {
+    dispatch({
+      type: GLOBALTYPES.ALERT,
+      payload: { error: error.response.data.msg },
+    });
+  }
+};
+
+export const logout = () => async (dispatch) => {
+  try {
+    localStorage.removeItem("firstLogin");
+    await postDataAPI("logout");
+    window.location.href = "/";
   } catch (error) {
     dispatch({
       type: GLOBALTYPES.ALERT,
